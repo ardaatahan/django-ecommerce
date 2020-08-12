@@ -8,5 +8,6 @@ urlpatterns = [
     path('checkout/', views.checkout, name='checkout'),
 
     # API routes
-    path('update_item/', views.update_item, name='update_item')
+    path('update_item/', views.update_item, name='update_item'),
+    path('process_order/', views.process_order, name='process_order')
 ]

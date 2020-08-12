@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+
+from datetime import datetime
 import json
 
 from .models import *
@@ -109,3 +111,35 @@ def update_item(request):
         order_item.delete()
 
     return JsonResponse('Item was added successfully.', safe=False)
+
+
+def process_order(request):
+
+    # Create a unique transaction id
+    transaction_id = datetime.now().timestamp()
+
+    # Get the sent data
+    data = json.loads(request.body)
+
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        total = float(data['form']['total']) 
+        order.transaction_id = transaction_id
+
+        if order.get_cart_total == total:
+            order.complete = True
+        
+        order.save()
+
+        if order.is_shipping:
+            ShippingAddress.objects.create(
+                customer=customer,
+                order=order,
+                address=data['shipping']['address'],
+                city=data['shipping']['city'],
+                state=data['shipping']['state'],
+                zipcode=data['shipping']['zipcode']
+            ) 
+
+    return JsonResponse('Payment complete.', safe=False)

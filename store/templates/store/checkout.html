@@ -55,7 +55,7 @@
 
 		<div class="col-lg-6">
 			<div class="box-element">
-				<a  class="btn btn-outline-dark" href="{% url 'cart' %}">&#x2190; Back to Cart</a>
+				<a  class="btn btn-outline-primary" href="{% url 'cart' %}">&#x2190; Back to Cart</a>
 				<hr>
 				<h3>Order Summary</h3>
 				<hr>
@@ -75,7 +75,8 @@
 
 	<script type="text/javascript">
 		const shipping = "{{ order.is_shipping }}";
-		const total = "{{ order.get_item_total|floatformat:2 }}"
+		const total = "{{ order.get_cart_total }}"
+		const orderUrl = "/process_order/";
 
 		if (shipping === "False") {
 			document.querySelector("#shipping-info").innerHTML = "";
@@ -98,7 +99,7 @@
 		})
 
 		const paymentButton = document.querySelector("#make-payment");
-		patmentButton.addEventListener("click", () => {
+		paymentButton.addEventListener("click", () => {
 			submitFormData();
 		})
 
@@ -106,14 +107,14 @@
 			const userFormData = {
 				name: null,
 				email: null,
-				total
+				total,
 			}
 
 			const shippingInfo = {
 				address: null,
 				city: null,
 				state: null,
-				zipcode: null
+				zipcode: null,
 			}
 
 			if (shipping !== "False") {
@@ -127,6 +128,22 @@
 				userFormData["name"] = form.name.value;
 				userFormData["email"] = form.email.value;
 			}
+
+			fetch(orderUrl, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json", 
+					"X-CSRFToken": csrftoken
+				},
+				body: JSON.stringify({
+					form: userFormData,
+					shipping: shippingInfo,
+				})
+			})
+				.then((response) => response.json())
+				.then((data) => {
+					window.location.href = "{% url 'store' %}"
+				})
 		}
 	</script>
 {% endblock body %}
