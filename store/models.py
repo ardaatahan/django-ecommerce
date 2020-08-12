@@ -45,6 +45,16 @@ class Order(models.Model):
     def get_cart_items(self):
         return sum([item.quantity for item in self.orderitem_set.all()])
 
+    @property
+    def is_shipping(self):
+        is_shipping = False
+
+        for item in self.orderitem_set.all():
+            if not item.product.digital:
+                is_shipping = True
+
+        return is_shipping
+
 
 class OrderItem(models.Model):
     product = models.ForeignKey("store.Product", on_delete=models.SET_NULL, null=True)
