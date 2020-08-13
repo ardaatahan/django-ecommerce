@@ -34,22 +34,13 @@
             const csrftoken = getToken('csrftoken');
 
             const getCookie = (name) => {
-                const cookieArr = document.cookie.split(";");
-
-                for (let cookie in cookieArr) {
-                    let cookiePair = cookie.split("=");
-
-                    if (name === cookiePair[0].trim()) {
-                        return decodeURIComponent(cookiePair[1]);
-                    }
-                }
-
-                return null;
+                const cookie = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+                return cookie ? cookie.pop() : '';
             }
 
             let cart = JSON.parse(getCookie("cart"));
 
-            if (cart == undefined) {
+            if (typeof cart === "undefined") {
                 cart = {};
                 document.cookie = `cart=${JSON.stringify(cart)};domain=;path=/`;
             }

@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const addCookieItem = (productId, action) => {
     if (action === "add") {
-      if (!cart[productId]) {
+      if (typeof cart[productId] === "undefined") {
         cart[productId] = {
           quantity: 1,
         };

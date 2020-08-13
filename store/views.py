@@ -5,25 +5,15 @@ from datetime import datetime
 import json
 
 from .models import *
+from .utils import *
 
 # Create your views here.
 def store(request):
 
     # Get the customer, order, and items depending on the user authentication
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        items = order.orderitem_set.all()
-        cart_items = order.get_cart_items
-    else:
-        items = []
-        order = {
-            'get_cart_items': 0,
-            'get_cart_total': 0,
-            'shipping': False 
-        }
-        cart_items = order['get_cart_items']
-
+    data = cart_data(request)
+    cart_items = data['cart_items']
+    
     # Get the products
     products = Product.objects.all()
     return render(request, 'store/store.html', {
@@ -35,19 +25,10 @@ def store(request):
 def cart(request):
 
     # Get the customer, order, and items depending on the user authentication
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        items = order.orderitem_set.all()
-        cart_items = order.get_cart_items
-    else:
-        items = []
-        order = {
-            'get_cart_items': 0,
-            'get_cart_total': 0,
-            'shipping': False
-        }
-        cart_items = order['get_cart_items']
+    data = cart_data(request)
+    cart_items = data['cart_items']
+    order = data['order']
+    items = data['items']
 
     return render(request, 'store/cart.html', {
         'items': items,
@@ -59,19 +40,10 @@ def cart(request):
 def checkout(request):
 
     # Get the customer, order, and items depending on the user authentication
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        items = order.orderitem_set.all()
-        cart_items = order.get_cart_items
-    else:
-        items = []
-        order = {
-            'get_cart_items': 0,
-            'get_cart_total': 0,
-            'shipping': False
-        }
-        cart_items = order['get_cart_items']
+    data = cart_data(request)
+    cart_items = data['cart_items']
+    order = data['order']
+    items = data['items']
 
     return render(request, 'store/checkout.html', {
         'items': items,
