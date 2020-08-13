@@ -93,16 +93,45 @@ def process_order(request):
     # Get the sent data
     data = json.loads(request.body)
 
+    # Process the order for an authenticated user
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        
+        # Process the order for an unauthenticated user
+        else:
+            name = data['form']['name']
+            email = data['form']['email']
+
+            cookie_data = cookie_cart(request)
+            items = cookie_data['items']
+
+            customer, created = Customer.object.get_or_create(email=email)
+            customer.name = name
+
+            customer.save()
+
+            order = Order.objects.create(
+                customer=customer,
+                complete=False
+            )
+
+            for item in items:
+                product = Product.object.get(pk=item['product']['id'])
+
+                order_item = OrderItem.objects.create(
+                    product=product,
+                    order=order,
+                    quantity=item['quantity']
+                )
+
         total = float(data['form']['total']) 
         order.transaction_id = transaction_id
 
         if order.get_cart_total == total:
             order.complete = True
         
-        order.save()
+        order.save() 
 
         if order.is_shipping:
             ShippingAddress.objects.create(
