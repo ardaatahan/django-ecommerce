@@ -9,12 +9,33 @@ document.addEventListener("DOMContentLoaded", () => {
     button.addEventListener("click", function () {
       const { product: productId, action } = this.dataset;
       if (user === "AnonymousUser") {
-        console.log("Not authenticated.");
+        addCookieItem(productId, action);
       } else {
         updateUserOrder(productId, action);
       }
     });
   });
+
+  const addCookieItem = (productId, action) => {
+    if (action === "add") {
+      if (!cart[productId]) {
+        cart[productId] = {
+          quantity: 1,
+        };
+      } else {
+        cart[productId]["quantity"] += 1;
+      }
+    } else if (action === "remove") {
+      cart[productId]["quantity"] -= 1;
+
+      if (cart[productId]["quantity"] < 1) {
+        delete cart[productId];
+      }
+    }
+
+    document.cookie = `cart=${JSON.stringify(cart)};domain=;path=/`;
+    location.reload();
+  };
 
   const updateUserOrder = (productId, action) => {
     fetch(url, {
