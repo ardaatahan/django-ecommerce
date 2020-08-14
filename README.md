@@ -11,20 +11,6 @@ Store enables the users to do the following:
 5. The application lets the user to sign up and log in. However, the user can still order from the store without being authenticated. If that is the case, order items are stored in cookies.
 6. The application does not allow the user to make payments.
 
-### Dependencies
-
-The dependencies can be found in the [requirements.txt](requirements.txt) file.
-
-### Screenshots
-
-![register](screenshots/register.png)
-![login](screenshots/login.png)
-![Store view](screenshots/store-view.png)
-![Cart view](screenshots/cart-view.png)
-![Checkout view](screenshots/checkout-view.png)
-![Shipped cart view](screenshots/shipped-cart-view.png)
-![Shipped checkout view](screenshots/shipped-checkout-view.png)
-
 ### Setup
 
 ```shell script
@@ -51,6 +37,20 @@ Or you can run this command to acceess the shell window.
 ```shell script
 python manage.py shell
 ```
+
+### Dependencies
+
+The dependencies can be found in the [requirements.txt](requirements.txt) file.
+
+### Screenshots
+
+![register](screenshots/register.png)
+![login](screenshots/login.png)
+![Store view](screenshots/store-view.png)
+![Cart view](screenshots/cart-view.png)
+![Checkout view](screenshots/checkout-view.png)
+![Shipped cart view](screenshots/shipped-cart-view.png)
+![Shipped checkout view](screenshots/shipped-checkout-view.png)
 
 ### Note
 
