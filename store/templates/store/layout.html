@@ -52,7 +52,13 @@
                     
             </ul>
             <div class="form-inline my-2 my-lg-0">
-                <a href="#" class="btn btn-outline-success">Login</a>
+                {% if request.user.is_authenticated %}
+                    <div id="welcome">Welcome {{ request.user.username }}</div>
+                    <a href="{% url 'logout' %}" class="btn btn-outline-success">Log Out</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="success" id="login">Log In</a>
+                    <a href="{% url 'register' %}" class="btn btn-outline-success">Register</a>
+                {% endif %}
                 <a href="{% url 'cart' %}">
                     <img src="{% static 'images/cart.png' %}" alt="cart" id="cart-icon">
                 </a>

@@ -51,6 +51,15 @@ h6 {
   margin-left: 30%;
 }
 
+#login {
+  margin-right: 10px;
+}
+
+#welcome {
+  margin-right: 10px;
+  color: #18bc9c;
+}
+
 .price {
   display: inline-block;
   float: right;
@@ -113,4 +122,8 @@ h6 {
 
 .hidden {
   display: none !important;
+}
+
+.top {
+  margin-top: 3%;
 }
