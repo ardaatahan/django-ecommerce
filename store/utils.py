@@ -13,7 +13,7 @@ def cookie_cart(request):
     order = {
         'get_cart_items': 0,
         'get_cart_total': 0,
-        'shipping': False
+        'is_shipping': False
     }
     cart_items = order['get_cart_items']
 
@@ -32,7 +32,7 @@ def cookie_cart(request):
                     'id': product.id,
                     'name': product.name,
                     'price': product.price,
-                    'imageURL': product.get_image_url
+                    'get_image_url': product.get_image_url
                 },
                 'quantity': cart[id]['quantity'],
                 'get_total': total

@@ -54,6 +54,11 @@ def register(request):
         try:
             user = User.objects.create_user(username, email, password)
             user.save()
+            customer = Customer.objects.create(
+                user=user,
+                name=user.username,
+                email=user.email
+            )
         except IntegrityError:
             return render(request, "store/register.html", {
                 "message": "Username already taken."

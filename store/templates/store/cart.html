@@ -37,7 +37,7 @@
                 {% for item in items %}
                     <div class="cart-row">
                         <div class="large">
-                            <img class="row-image" src="{{ item.product.get_image_url }}" alt="placeholder">
+                            <img class="row-image" src="{{ item.product.get_image_url }}" alt="item image">
                         </div>
                         <div class="large"><p>{{ item.product.name }}</p></div>
                         <div class="small"><p>${{ item.product.price|floatformat:2 }}</p></div>

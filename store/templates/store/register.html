@@ -1,11 +1,13 @@
 {% extends "store/layout.html" %}
 
 {% block body %} 
+    <h2>Register</h2>
+
     {% if message %}
         <div>{{ message }}</div>
     {% endif %}
 
-    <form action="{% url 'register' %}" method="post" class="top">
+    <form action="{% url 'register' %}" method="post">
         {% csrf_token %}
         <div class="form-group">
             <input class="form-control" autofocus type="text" name="username" placeholder="Username">

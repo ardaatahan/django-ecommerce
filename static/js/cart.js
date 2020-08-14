@@ -1,10 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   const url = "/update_item/";
 
-  // Get all the update buttons
   const updateButtons = document.querySelectorAll(".update-cart");
 
-  // For each of the update buttons add a click listener
   updateButtons.forEach((button) => {
     button.addEventListener("click", function () {
       const { product: productId, action } = this.dataset;

@@ -12,6 +12,11 @@
                 <img src="{{ product.get_image_url }}" class="thumbnail" alt="placeholder">
                 <div class="box-element product">
                     <h6><strong>{{ product.name }}</strong></h6>
+                    {% if product.digital %}
+                        <small>Digital product.</small>
+                    {% else %}
+                        <small>Shipped product.</small>
+                    {% endif %}
                     <hr>
                     <button data-product={{ product.id }} data-action="add" class="btn btn-outline-success add-btn update-cart">Add to Cart</button>
                     <h4 class="price">${{ product.price|floatformat:2 }}</h4>
