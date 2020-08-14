@@ -18,12 +18,12 @@ The dependencies can be found in the [requirements.txt](requirements.txt) file.
 ### Screenshots
 
 ![register](screenshots/register.png)
-![login](screenshots/login)
-![Store view](screenshots/store-view)
-![Cart view](screenshots/cart-view)
-![Checkout view](screenshots/checkout-view)
-![Shipped cart view](screenshots/shipped-cart-view)
-![Shipped checkout view](screenshots/shipped-checkout-view)
+![login](screenshots/login.png)
+![Store view](screenshots/store-view.png)
+![Cart view](screenshots/cart-view.png)
+![Checkout view](screenshots/checkout-view.png)
+![Shipped cart view](screenshots/shipped-cart-view.png)
+![Shipped checkout view](screenshots/shipped-checkout-view.png)
 
 ### Setup
 
