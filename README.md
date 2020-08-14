@@ -32,7 +32,7 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-Or you can run this command to acceess the shell window.
+Or you can run this command to access the shell window.
 
 ```shell script
 python manage.py shell
