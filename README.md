@@ -17,7 +17,7 @@ The dependencies can be found in the [requirements.txt](requirements.txt) file.
 
 ### Screenshots
 
-![register](screenshots/register)
+![register](screenshots/register.png)
 ![login](screenshots/login)
 ![Store view](screenshots/store-view)
 ![Cart view](screenshots/cart-view)
